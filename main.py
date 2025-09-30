@@ -27,9 +27,7 @@ except FileNotFoundError:
 X = df.drop('Potability', axis=1)
 y = df['Potability']
 
-# ----------------------------------------------------
 # 2. DATA CLEANING AND IMPUTATION
-# ----------------------------------------------------
 # Use SimpleImputer to fill missing values (NaN) with the mean of the column
 print("\n--- 2. Data Cleaning and Imputation ---")
 imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
@@ -38,3 +36,14 @@ X_imputed_array = imputer.fit_transform(X)
 X_imputed = pd.DataFrame(X_imputed_array, columns=X.columns)
 
 print("Missing values imputed using the mean for all features.")
+
+# 3. FEATURE SCALING
+# Standardize features (Scaling is vital for ML models)
+print("\n--- 3. Feature Scaling ---")
+scaler = StandardScaler()
+X_scaled_array = scaler.fit_transform(X_imputed)
+X_scaled = pd.DataFrame(X_scaled_array, columns=X.columns)
+
+# Save the scaler for deployment
+joblib.dump(scaler, 'scaler.pkl')
+print("Features scaled and StandardScaler saved as 'scaler.pkl'.")
