@@ -67,3 +67,33 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 
 # Check distribution after SMOTE
 print(f"Resampled training class distribution:\n{y_train_resampled.value_counts()}")
+
+# 6. MODEL TRAINING (Random Forest - Optimized)
+print("\n--- 6. Training and Tuning Random Forest Model ---")
+# Define the model for tuning
+model_rf_tuned = RandomForestClassifier(random_state=42)
+
+# Define the grid of hyperparameters to search (based on your best results)
+param_grid = {
+    'n_estimators': [100, 200],  # Testing fewer values for speed
+    'max_depth': [20, 30]
+}
+
+# Set up GridSearchCV
+grid_search = GridSearchCV(
+    estimator=model_rf_tuned,
+    param_grid=param_grid,
+    cv=5,
+    scoring='accuracy',
+    n_jobs=-1,
+    verbose=0
+)
+
+# Fit the grid search to the resampled training data
+grid_search.fit(X_train_resampled, y_train_resampled)
+
+# Get the best model
+best_rf_model = grid_search.best_estimator_
+
+print(f"Best Parameters found: {grid_search.best_params_}")
+print(f"Best cross-validation score: {grid_search.best_score_:.4f}")
