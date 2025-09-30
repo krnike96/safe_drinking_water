@@ -55,3 +55,15 @@ X_train, X_test, y_train, y_test = train_test_split(
     X_scaled, y, test_size=0.2, random_state=42, stratify=y
 )
 print(f"Training set size: {len(X_train)} | Testing set size: {len(X_test)}")
+
+# 5. ADDRESSING CLASS IMBALANCE (SMOTE)
+# Check initial distribution
+print(f"\nInitial training class distribution:\n{y_train.value_counts()}")
+
+# Apply SMOTE to the training data only
+print("Applying SMOTE to balance the training data...")
+smote = SMOTE(random_state=42)
+X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
+
+# Check distribution after SMOTE
+print(f"Resampled training class distribution:\n{y_train_resampled.value_counts()}")
