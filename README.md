@@ -114,7 +114,7 @@ The application will open in your default web browser.
 
 ## Technologies Used
 
-- **Python 3.x**
+- **Python 3.10.x**
 - **scikit-learn** - Machine Learning & Model Training
 - **imbalanced-learn** - SMOTE Implementation
 - **pandas** - Data Manipulation
