@@ -116,3 +116,15 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Final Random Forest Confusion Matrix')
 #plt.show()
+
+# 8. FEATURE IMPORTANCE ANALYSIS
+print("\n--- 8. Feature Importance Analysis ---")
+importances = best_rf_model.feature_importances_
+feature_importance_df = pd.DataFrame({
+    'feature': X.columns,
+    'importance': importances
+}).sort_values('importance', ascending=False)
+
+print("Top 5 Most Important Features:")
+print(feature_importance_df.head())
+
