@@ -97,3 +97,22 @@ best_rf_model = grid_search.best_estimator_
 
 print(f"Best Parameters found: {grid_search.best_params_}")
 print(f"Best cross-validation score: {grid_search.best_score_:.4f}")
+
+
+# 7. FINAL MODEL EVALUATION
+print("\n--- 7. Final Model Evaluation ---")
+y_pred_tuned = best_rf_model.predict(X_test)
+
+print("Tuned Random Forest Classification Report:")
+print(classification_report(y_test, y_pred_tuned))
+
+# Plot Confusion Matrix (Optional visualization for local environment)
+cm_rf = confusion_matrix(y_test, y_pred_tuned)
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm_rf, annot=True, fmt='d', cmap='Blues', cbar=False,
+            xticklabels=['Not Potable (0)', 'Potable (1)'],
+            yticklabels=['Not Potable (0)', 'Potable (1)'])
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Final Random Forest Confusion Matrix')
+#plt.show()
