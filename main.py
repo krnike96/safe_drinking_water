@@ -128,3 +128,10 @@ feature_importance_df = pd.DataFrame({
 print("Top 5 Most Important Features:")
 print(feature_importance_df.head())
 
+# 9. SAVING THE FINAL MODEL ARTIFACTS
+print("\n--- 9. Saving Final Model ---")
+# Save the best model for deployment
+joblib.dump(best_rf_model, 'best_rf_model.pkl')
+print("Final model saved as 'best_rf_model.pkl'.")
+
+print("\n--- Deployment Setup Complete ---")
